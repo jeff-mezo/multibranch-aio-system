@@ -6,11 +6,14 @@ import {
   Building,
   ChevronDown,
   ChevronUp,
+  History,
   Laptop,
   Layout,
   LucideIcon,
   Menu,
+  PersonStanding,
   Receipt,
+  Users,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -118,6 +121,19 @@ const SidebarLinkDropdown = ({
   );
 };
 
+// const sidebarItems = [
+//   {
+//     title: "MENU",
+//     items: [
+//       {
+//         icon: "",
+//         label: "Dashboard",
+//         href: "/",
+//         visible: [""]
+//       }
+//     ]
+// ]
+
 const Sidebar = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
@@ -158,7 +174,7 @@ const Sidebar = () => {
       <div className="flex-grow mt-8">
         {/* Links here */}
         <SidebarLink
-          href="/dashboard"
+          href="/"
           icon={Layout}
           label="Dashboard"
           isCollapsed={isSidebarCollapsed}
@@ -168,22 +184,30 @@ const Sidebar = () => {
           label="Branches"
           isCollapsed={isSidebarCollapsed}
           dropdownLinks={[
-            { href: "/mainbranch", label: "Mangagoy" },
-            { href: "/barobo", label: "Barobo" },
-            { href: "/tandag", label: "Tandag" },
+            { href: "/list/mangagoy", label: "Mangagoy" },
+            { href: "/list/mangagoy", label: "Barobo" },
+            { href: "/list/mangagoy", label: "Tandag" },
           ]}
           href={""}
         />
         <SidebarLink
-          href="/invoice"
+          href="/list/invoice"
           icon={Receipt}
           label="Invoice"
           isCollapsed={isSidebarCollapsed}
         />
+
         <SidebarLink
-          href="/statistics"
-          icon={Layout}
-          label="Statistics"
+          href="/list/management"
+          icon={Users}
+          label="Management"
+          isCollapsed={isSidebarCollapsed}
+        />
+
+        <SidebarLink
+          href="/list/history"
+          icon={History}
+          label="History"
           isCollapsed={isSidebarCollapsed}
         />
       </div>

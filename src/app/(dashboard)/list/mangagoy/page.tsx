@@ -1,11 +1,21 @@
 import TableSearch from "@/components/tableSearch";
 import Pagination from "@/components/Pagination";
-import { Filter, FilterIcon, Plus, SortAscIcon } from "lucide-react";
+import {
+  Delete,
+  Eye,
+  Filter,
+  FilterIcon,
+  Plus,
+  SortAscIcon,
+  Trash,
+  View,
+} from "lucide-react";
 import React from "react";
 import Table from "@/components/Table";
 import Image from "next/image";
 import Link from "next/link";
 // import FormModal from "@/components/FormModal";
+import { role, itemData } from "@/lib/data";
 
 type Item = {
   itemId: string; // Unique item identifier
@@ -25,57 +35,6 @@ type Laptop = {
   storage: string;
   battLife: string;
 };
-
-const itemData = [
-  {
-    itemId: "uuid1",
-    name: "Laptop Pro",
-    price: 1500.0,
-    quantity: 10,
-    laptop: {
-      laptopId: "uuid1",
-      serialNumber: "SN12345",
-      itemId: "uuid1",
-      modelName: "Pro 2025",
-      processor: "i7",
-      memory: "16GB",
-      storage: "512GB SSD",
-      battLife: "10 hours",
-    },
-  },
-  {
-    itemId: "uuid2",
-    name: "Laptop Pro",
-    price: 1500.0,
-    quantity: 10,
-    laptop: {
-      laptopId: "uuid2",
-      serialNumber: "SN12345",
-      itemId: "uuid1",
-      modelName: "Pro 2025",
-      processor: "i7",
-      memory: "16GB",
-      storage: "512GB SSD",
-      battLife: "10 hours",
-    },
-  },
-  {
-    itemId: "uuid3",
-    name: "Laptop Pro",
-    price: 1500.0,
-    quantity: 10,
-    laptop: {
-      laptopId: "uuid3",
-      serialNumber: "SN12345",
-      itemId: "uuid1",
-      modelName: "Pro 2025",
-      processor: "i7",
-      memory: "16GB",
-      storage: "512GB SSD",
-      battLife: "10 hours",
-    },
-  },
-];
 
 const columns = [
   {
@@ -131,7 +90,7 @@ const MangagoyInventory = async ({
   const renderRow = (item: Item) => (
     <tr
       key={item.itemId}
-      className="border-b border-gray-200 even:bg-slate-50 text-sm hover:bg-lamaPurpleLight"
+      className="border-b border-gray-200 even:bg-gray-50 text-sm hover:bg-gray-100"
     >
       {/* <td className="flex items-center gap-4 p-4">
         <Image
@@ -166,19 +125,20 @@ const MangagoyInventory = async ({
       <td className="hidden md:table-cell">{item.laptop?.storage}</td>
       <td className="hidden md:table-cell">{item.laptop?.battLife}</td>
       <td>
-        {/* <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2">
           <Link href={`/list/teachers/${item.itemId}`}>
-            <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaSky">
-              <Image src="/view.png" alt="" width={16} height={16} />
+            <button className="w-7 h-7 flex items-center justify-center rounded-full ">
+              {/* <Image src="/view.png" alt="" width={16} height={16} /> */}
+              <Eye width={16} height={16} />
             </button>
           </Link>
           {role === "admin" && (
-            // <button className="w-7 h-7 flex items-center justify-center rounded-full bg-lamaPurple">
-            //   <Image src="/delete.png" alt="" width={16} height={16} />
-            // </button>
-            <FormModal table="teacher" type="delete" id={item.itemId} />
+            <button className="w-7 h-7 flex items-center justify-center rounded-full ">
+              <Trash width={16} height={16} />
+            </button>
+            // <FormModal table="teacher" type="delete" id={item.itemId} />
           )}
-        </div> */}
+        </div>
       </td>
     </tr>
   );
@@ -201,10 +161,13 @@ const MangagoyInventory = async ({
               {/* <Image src="/sort.png" alt="" width={14} height={14} /> */}
               <SortAscIcon width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
-              {/* <Image src="/sort.png" alt="" width={14} height={14} /> */}
-              <Plus width={14} height={14} />
-            </button>
+
+            {role === "admin" && (
+              <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
+                {/* <Image src="/sort.png" alt="" width={14} height={14} /> */}
+                <Plus width={14} height={14} />
+              </button>
+            )}
             {/* {role === "admin" && (
               <FormContainer table="teacher" type="create" />
             )} */}
